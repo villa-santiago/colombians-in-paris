@@ -9,10 +9,10 @@ function CreatePostPage () {
             location: "",
             description: "",
             price: "",
-            date: ""
 }
 
     );
+
 
     const handleChange = (e) => {
         const { name, value} = e.target;
@@ -25,10 +25,16 @@ function CreatePostPage () {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.title || !formData.description) {
+        if (!formData.title || !formData.description || !formData.author) {
             alert("Por favor completa los campos obligatorios");
             return;
         }
+
+        const currentDate = new Date().toISOString().split("T")[0];
+        const postData = {
+            ...formData,
+            date: currentDate
+        };
     
 
     try {
@@ -37,7 +43,7 @@ function CreatePostPage () {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(postData)
         });
 
         if (!response.ok) {
@@ -61,8 +67,21 @@ function CreatePostPage () {
         <div>
             <h1 className="text-2xl font-bold mb-4">Crear un nuevo post</h1>
             <form className="space-y-8">
+
+                 <div>
+                    <label className="block font-medium mb-1">Tu nombre y apellido*</label>
+                    <input 
+                        type = "text"
+                        name = "author"
+                        value = {formData.author}
+                        onChange={handleChange}
+                        className="w-full bg-gray-200 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
+                </div>
+
                 <div>
-                    <label className="block font-medium mb-1">Titulo* <span className="text-md text-gray-400">(Qué servicio ofreces?)</span></label>
+                    <label className="block font-medium mb-1">Qué servicio ofreces?*</label>
                     <input 
                         type = "text"
                         name = "title"
@@ -74,7 +93,7 @@ function CreatePostPage () {
                 </div>
 
                 <div>
-                    <label className="block font-medium mb-1">Descripcion* <span className="text-md text-gray-400">(Describe brevemente tus servicio)</span></label>
+                    <label className="block font-medium mb-1">Descripcion* <span className="text-md text-gray-400">(Describe brevemente tu servicio)</span></label>
                     <textarea
                         name = "description"
                         value = {formData.description}
@@ -103,17 +122,6 @@ function CreatePostPage () {
                         type = "text"
                         name = "category"
                         value = {formData.category}
-                        onChange={handleChange}
-                        className="w-full bg-gray-200 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
-
-                <div>
-                    <label className="block font-medium mb-1">Fecha</label>
-                    <input 
-                        type = "date"
-                        name = "date"
-                        value = {formData.date}
                         onChange={handleChange}
                         className="w-full bg-gray-200 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />

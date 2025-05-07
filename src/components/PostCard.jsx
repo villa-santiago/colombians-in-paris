@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
+
 function PostCard({ post }) {
   return (
+
+    <Link to = {`/posts/${post.id}`} className="">
 
     <div className="bg-white shadow p-4 rounded">
     
@@ -7,13 +11,11 @@ function PostCard({ post }) {
       {post.title}
       </h2>
 
-      <p className="text-gray-600 text-md">
-      {post.date}
-      </p>
+      <p className="text-gray-600 text-md">Publicado por <span className="font-medium text-gray-800">{post.author}</span>{" "}<span className="text-md text-gray-400">{post.date}</span></p>
 
-      <p className="text-gray-600 text-md pt-2">
+      {/* <p className="text-gray-600 text-md pt-2">
       {post.description}
-      </p>
+      </p> */}
 
       <div className="flex gap-2 mt-4">
         <span className="bg-green-100 text-gray-800 text-sm px-3 py-1 rounded">
@@ -25,6 +27,7 @@ function PostCard({ post }) {
         </span>
       </div>
     </div>
+    </Link>
   );
 }
 
