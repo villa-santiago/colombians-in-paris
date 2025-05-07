@@ -5,7 +5,7 @@ function PostCard({ post }) {
 
     <Link to = {`/posts/${post.id}`} className="">
 
-    <div className="bg-white shadow p-4 rounded">
+    <div className="bg-white shadow p-4 rounded hover:bg-gray-100">
     
       <h2 className="text-xl font-semibold">
       {post.title}
