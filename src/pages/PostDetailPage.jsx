@@ -23,7 +23,8 @@ return (
         <span className="text-sm text-gray-400">{post.date}</span>
       </p>
       <p className="text-lg text-gray-700 mb-4">{post.description}</p>
-      <p className="text-md text-gray-600 mb-1"><strong>Categoría:</strong> {post.category}</p>
+      <p className="text-md text-gray-600 mb-1"><strong>Email:</strong> {post.contact}</p>
+      <p className="text-md text-gray-600 mb-1"><strong>Telefono:</strong> {post.phone}</p>
       <p className="text-md text-gray-600 mb-1"><strong>Ubicación:</strong> {post.location}</p>
       <p className="text-md text-gray-600"><strong>Precio:</strong> €{post.price}</p>
     </div>

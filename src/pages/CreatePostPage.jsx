@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreatePostPage () {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState(
         {
             title: "",
@@ -9,6 +11,8 @@ function CreatePostPage () {
             location: "",
             description: "",
             price: "",
+            contact: "",
+            phone: ""
 }
 
     );
@@ -28,12 +32,12 @@ function CreatePostPage () {
         if (!formData.title || !formData.description || !formData.author) {
             alert("Por favor completa los campos obligatorios");
             return;
-        }
+        };
 
-        const currentDate = new Date().toISOString().split("T")[0];
+        
         const postData = {
             ...formData,
-            date: currentDate
+            date: new Date().toISOString().split("T")[0]
         };
     
 
@@ -50,10 +54,10 @@ function CreatePostPage () {
             throw new Error ("Error de envio");
         }
 
-        const data = await response.json();
-        console.log("Respuesta del backend", data);
+        await response.json();
+        alert("Tu post se ha creado exitosamente");
+        navigate("/");
 
-        alert ("Tu post ha sido creado exitosamente");
 
     } catch (error){
         console.error("Error:", error);
@@ -66,7 +70,7 @@ function CreatePostPage () {
     return(
         <div>
             <h1 className="text-2xl font-bold mb-4">Crear un nuevo post</h1>
-            <form className="space-y-8">
+            <form className="space-y-8" onSubmit={handleSubmit}>
 
                  <div>
                     <label className="block font-medium mb-1">Tu nombre y apellido*</label>
@@ -139,9 +143,32 @@ function CreatePostPage () {
                     />
                 </div>
 
+                <div>
+                    <label className="block font-medium mb-1">Correo electronico</label>
+                    <input 
+                        type = "email"
+                        name = "contact"
+                        value = {formData.contact}
+                        onChange={handleChange}
+                        className="w-full bg-gray-200 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        min ="0"
+                    />
+                </div>
+
+                <div>
+                    <label className="block font-medium mb-1">Telefono</label>
+                    <input 
+                        type = "tel"
+                        name = "phone"
+                        value = {formData.phone}
+                        onChange={handleChange}
+                        className="w-full bg-gray-200 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        min ="0"
+                    />
+                </div>
+
                 <button
                     type = "submit"
-                    onClick={handleSubmit}
                     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                     Crear Post
                 </button>
