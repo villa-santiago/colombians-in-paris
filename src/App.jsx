@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import CreatePostPage from './pages/CreatePostPage';
+import EditPostPage from './pages/EditPostPage';
 import PostDetailPage from './pages/PostDetailPage';
 import Layout from './components/Layout'
 import './App.css'
@@ -15,6 +16,7 @@ function App() {
         <Route path = "/" element = {<Layout />}>
           <Route index element = {<HomePage />}/>
           <Route path = "create" element = {<CreatePostPage />}/>
+          <Route path = "/posts/:id/edit" element = {<EditPostPage/>}/>
           <Route path = "posts/:id" element = {<PostDetailPage />}/> 
           <Route path = "about" element = {<AboutPage />}/>
           <Route path = "contact" element = {<ContactPage />}/>

@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PostDetail from "../components/PostDetail";
 
 function PostDetailPage(){
     const {id} = useParams();
     const [post, setPost] = useState(null);
+    const navigate = useNavigate();
 
 
 useEffect(() => {
@@ -15,20 +18,16 @@ useEffect(() => {
 
 if (!post) return <p>No se ha encontrado este post</p>;
 
-return (
-    <div className="mx-auto">
-      <h1 className="text-2xl font-bold mb-2">{post.title}</h1>
-      <p className="text-sm text-gray-500 mb-4">
-        Publicado por <span className="font-medium text-gray-800">{post.author}</span> -{" "}
-        <span className="text-sm text-gray-400">{post.date}</span>
-      </p>
-      <p className="text-lg text-gray-700 mb-4">{post.description}</p>
-      <p className="text-md text-gray-600 mb-1"><strong>Email:</strong> {post.contact}</p>
-      <p className="text-md text-gray-600 mb-1"><strong>Telefono:</strong> {post.phone}</p>
-      <p className="text-md text-gray-600 mb-1"><strong>Ubicación:</strong> {post.location}</p>
-      <p className="text-md text-gray-600"><strong>Precio:</strong> €{post.price}</p>
-    </div>
-);
+return <>
+    <PostDetail post={post}/>
+    <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" onClick={() => navigate(`/posts/${post.id}/edit`)}>
+    Editar Post
+    </button>
+</>
+
+
 }
+
+
 
 export default PostDetailPage
