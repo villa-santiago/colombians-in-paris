@@ -10,6 +10,8 @@ function PostDetail({ post }) {
         </div>
   
         <p className="text-gray-700 text-lg mb-6">{post.description}</p>
+
+        <hr className="my-6 border-gray-200" />
   
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           <p className="text-gray-600"><strong>Email:</strong> {post.contact}</p>

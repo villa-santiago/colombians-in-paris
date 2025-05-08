@@ -1,4 +1,4 @@
-function PostForm ({formData, onChange, onSubmit}) {
+function PostForm ({formData, onChange, onSubmit, isEditing = false, onDelete}) {
     return (
         <form className="space-y-8" onSubmit={onSubmit}>
 
@@ -97,12 +97,26 @@ function PostForm ({formData, onChange, onSubmit}) {
                     />
                 </div>
 
-               <button 
-               type="submit"
-               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-               >
-                Publicar post
-               </button>
+              <div className="flex gap-4">
+                <button
+                    type="submit"
+                    className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                >
+                    {isEditing ? "Guardar cambios" : "Publicar post"}
+                </button>
+
+                {isEditing && onDelete && (
+                    <button
+                        type="button"
+                        onClick={onDelete}
+                        className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                    >
+                        Eliminar post
+                    </button>
+                )}
+
+
+              </div>
 
             </form>
 

@@ -71,7 +71,11 @@ function CreatePostPage () {
     return(
         <div>
             <h1 className="text-2xl font-bold mb-4">Publicar un nuevo post</h1>
-            <PostForm formData={formData} onChange={handleChange} onSubmit={handleSubmit}/>
+            <PostForm 
+            formData={formData}
+            onChange={handleChange}
+            onSubmit={handleSubmit}     
+            />
          </div>
         
     );

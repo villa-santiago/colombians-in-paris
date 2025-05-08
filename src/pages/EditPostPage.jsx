@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PostForm from "../components/PostForm";
 
-function EditPostPage () {
-    const {id} = useParams();
+function EditPostPage() {
+    const { id } = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ function EditPostPage () {
                 const data = await response.json();
                 setFormData(data);
                 setLoading(false);
-            } catch (error){
+            } catch (error) {
                 console.error("Error loading post:", error);
                 alert("No se pudo cargar el post");
                 navigate("/");
@@ -24,11 +24,10 @@ function EditPostPage () {
         };
 
         fetchPost();
-    }, [id,navigate]);
+    }, [id, navigate]);
 
     const handleChange = (e) => {
-        const { name, value} = e.target;
-
+        const { name, value } = e.target;
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value
@@ -45,7 +44,7 @@ function EditPostPage () {
         try {
             const response = await fetch(`http://localhost:3000/posts/${id}`, {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });
 
@@ -57,21 +56,41 @@ function EditPostPage () {
             console.error("Update error:", error);
             alert("Error al actualizar el post");
         }
-        };
+    };
 
-        if (loading || !formData) return <p>Cargando...</p>;
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este post?");
+        if (!confirmDelete) return;
 
-        return (
-            <div>
-                <h1 className="text-2xl font-bold mb-4">Edita tu post</h1>
-                <PostForm
+        try {
+            const response = await fetch(`http://localhost:3000/posts/${id}`, {
+                method: "DELETE",
+            });
+
+            if (!response.ok) throw new Error("Error al eliminar el post");
+
+            alert("Post eliminado correctamente");
+            navigate("/");
+        } catch (error) {
+            console.error("Delete error:", error);
+            alert("Error al eliminar el post");
+        }
+    };
+
+    if (loading || !formData) return <p>Cargando...</p>;
+
+    return (
+        <div>
+            <h1 className="text-2xl font-bold mb-4">Edita tu post</h1>
+            <PostForm
                 formData={formData}
                 onChange={handleChange}
                 onSubmit={handleSubmit}
                 isEditing={true}
-                />
-            </div>
-        );
-    }
+                onDelete={handleDelete}
+            />
+        </div>
+    );
+}
 
-    export default EditPostPage
+export default EditPostPage;

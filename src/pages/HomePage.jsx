@@ -2,22 +2,51 @@ import PostCard from "../components/PostCard";
 import { useEffect, useState } from "react";
 
 function HomePage() {
-  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [activeFilter, setActiveFilter] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/posts")
       .then((res) => res.json())
-      .then((data) => setPosts(data))
+      .then((data) => {
+        const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setAllPosts(sorted);
+        setFilteredPosts(sorted);
+      })
       .catch((err) => console.error("Error fetching posts:", err));
   }, []);
+
+  const handleFilterTagClick = (type, value) => {
+    setActiveFilter({ type, value });
+    setFilteredPosts(allPosts.filter((post) => post[type] === value));
+  };
+
+  const clearFilter = () => {
+    setActiveFilter(null);
+    setFilteredPosts(allPosts);
+  };
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Posts</h1>
+
+      {activeFilter && (
+        <div className="mb-4">
+          <p>
+            Filtrando por <strong>{activeFilter.type}</strong>:{" "}
+            {activeFilter.value}{" "}
+            <button onClick={clearFilter} className="ml-2 text-blue-500 underline">
+              Borrar filtro
+            </button>
+          </p>
+        </div>
+      )}
+
       <ul className="space-y-4">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <li key={post.id}>
-            <PostCard post={post} />
+            <PostCard post={post} onFilterTagClick={handleFilterTagClick} />
           </li>
         ))}
       </ul>
