@@ -1,5 +1,6 @@
 import PostCard from "../components/PostCard";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [allPosts, setAllPosts] = useState([]);
@@ -29,7 +30,16 @@ function HomePage() {
 
   return (
     <div>
+    <div className="flex justify-between items-center">
       <h1 className="text-2xl font-bold mb-4">Posts</h1>
+      <Link to = "/create">
+      <button
+      className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300"
+      >
+      +
+      </button>
+      </Link>
+      </div>
 
       {activeFilter && (
         <div className="mb-4">
