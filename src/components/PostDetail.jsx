@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import editIcon from "../assets/edit.png"
+
 
 function PostDetail({ post }) {
   const navigate = useNavigate();
@@ -33,10 +33,10 @@ function PostDetail({ post }) {
           <span className="font-medium text-gray-500">Post ID:</span> {post.id}
         </p>
         <button
-        className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300"
+        className="text-blue-600 hover:underline transition"
         onClick={() => navigate(`/posts/${post.id}/edit`)}
         >
-        <img src={editIcon} className="w-5 h-5" />
+        Editar Post
         </button>
         </div>
       </div>

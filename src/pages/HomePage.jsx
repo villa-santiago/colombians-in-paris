@@ -30,16 +30,18 @@ function HomePage() {
 
   return (
     <div>
-    <div className="flex justify-between items-center">
-      <h1 className="text-2xl font-bold mb-4">Posts</h1>
-      <Link to = "/create">
-      <button
-      className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300"
-      >
+   <div className="mb-6 flex items-center justify-between">
+  <h1 className="text-2xl font-bold">Posts</h1>
+  <Link to="/create">
+    <button
+      className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-xl hover:bg-gray-300"
+      title="Crear nuevo post"
+    >
       +
-      </button>
-      </Link>
-      </div>
+    </button>
+  </Link>
+</div>
+
 
       {activeFilter && (
         <div className="mb-4">

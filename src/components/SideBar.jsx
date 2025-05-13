@@ -14,10 +14,22 @@ function SideBar () {
 
             <hr className="my-6 border-gray-600" />
 
+              <nav className="flex flex-col text-gray-400">
+                <Link to = "/rules">Normas de la comunidad</Link>
+                <Link to = "/themes">Otros temas</Link>
+            </nav>
+
+            <hr className="my-6 border-gray-600" />
+
             <nav className="flex flex-col text-gray-400">
                 <Link to = "/about">Información</Link>
                 <Link to = "/contact">Contacto</Link>
             </nav>
+
+            
+
+          
+
         </div>
     );
 }
