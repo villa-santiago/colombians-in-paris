@@ -5,6 +5,7 @@ function PostForm({
   onSubmit,
   isEditing = false,
   onDelete,
+  id
 }) {
   const navigate = useNavigate();
   return (
@@ -154,15 +155,21 @@ function PostForm({
         <div className="flex gap-4">
           <button
             type="submit"
-            className="border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white"
+            className="border border-gray-800 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-800 hover:text-white"
           >
             {isEditing ? "Guardar cambios" : "Publicar post"}
           </button>
 
           <button
-            type="button"
-            onClick={() => navigate("/")}
-            className="border border-red-600 text-red-600 px-4 py-2 rounded-full hover:bg-red-600 hover:text-white"
+          type="button"
+          onClick={() => {
+            if (isEditing) {
+              navigate(`/posts/${formData.id}`);
+            } else {
+              navigate("/");
+            }
+          }}
+          className="border border-red-600 text-red-600 px-4 py-2 rounded-full hover:bg-red-600 hover:text-white"
           >
             Cancelar
           </button>

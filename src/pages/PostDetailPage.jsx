@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PostDetail from "../components/PostDetail";
 
 function PostDetailPage(){
     const {id} = useParams();
     const [post, setPost] = useState(null);
+    const navigate = useNavigate();
     
 
 
@@ -18,6 +19,12 @@ useEffect(() => {
 if (!post) return <p>No se ha encontrado este post</p>;
 
 return <>
+    <button
+    onClick={() => navigate("/")}
+    className="mb-4 text-gray-400 hover:text-gray-800 transition"
+    >
+        ← Regresar
+    </button>
     <PostDetail post={post}/>
 </>
 
