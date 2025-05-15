@@ -17,7 +17,7 @@ function HomePage() {
         setFilteredPosts(sorted);
       })
       .catch((err) => console.error("Error cargando posts:", err));
-  }, []);
+  }, [API_URL]);
 
   const handleFilterTagClick = (type, value) => {
     setActiveFilter({ type, value });
