@@ -6,9 +6,10 @@ function HomePage() {
   const [allPosts, setAllPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [activeFilter, setActiveFilter] = useState(null);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch("http://localhost:3000/posts")
+    fetch(`${API_URL}/posts`)
       .then((res) => res.json())
       .then((data) => {
         const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
