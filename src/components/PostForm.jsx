@@ -4,8 +4,7 @@ function PostForm({
   onChange,
   onSubmit,
   isEditing = false,
-  onDelete,
-  id
+  onDelete
 }) {
   const navigate = useNavigate();
   return (
