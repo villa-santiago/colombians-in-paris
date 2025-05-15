@@ -6,15 +6,16 @@ function PostDetailPage(){
     const {id} = useParams();
     const [post, setPost] = useState(null);
     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API_URL;
     
 
 
 useEffect(() => {
-    fetch(`http://localhost:3000/posts/${id}`)
+    fetch(`${API_URL}/posts/${id}`)
     .then((res) => res.json())
     .then((data) => setPost(data))
     .catch((err) => console.error("Error cargando posts:", err));
-}, [id]);
+}, [API_URL, id]);
 
 if (!post) return <p>No se ha encontrado este post</p>;
 

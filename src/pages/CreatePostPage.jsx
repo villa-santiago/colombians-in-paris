@@ -4,6 +4,7 @@ import PostForm from "../components/PostForm";
 import { Link } from "react-router-dom";
 
 function CreatePostPage() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
@@ -38,7 +39,7 @@ function CreatePostPage() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/posts", {
+      const response = await fetch(`${API_URL}/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

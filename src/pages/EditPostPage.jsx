@@ -7,11 +7,12 @@ function EditPostPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/${id}`);
+        const response = await fetch(`${API_URL}/posts/${id}`);
         if (!response.ok) throw new Error("Post not found");
         const data = await response.json();
         setFormData(data);
@@ -24,7 +25,7 @@ function EditPostPage() {
     };
 
     fetchPost();
-  }, [id, navigate]);
+  }, [API_URL, id, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +43,7 @@ function EditPostPage() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${id}`, {
+      const response = await fetch(`${API_URL}/posts/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -65,7 +66,7 @@ function EditPostPage() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${id}`, {
+      const response = await fetch(`${API_URL}/posts/${id}`, {
         method: "DELETE",
       });
 
