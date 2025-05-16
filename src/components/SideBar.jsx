@@ -1,37 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
+function Sidebar({ isOpen, toggleSidebar }) {
+  return (
+    <>
+      
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        onClick={toggleSidebar}
+      ></div>
 
-function SideBar () {
-    return (
-        <div className="w-64 bg-gray-800 text-white p-6 flex flex-col space-between h-screen">
-            <h1 className="text-2xl font-bold mb-4">Logo</h1>
-            <div>
-            <nav className="flex flex-col">
-                <Link to = "/">Posts</Link>
-                <Link to = "/create">Crear Post</Link>
-            </nav>
-            </div>
-
-            <hr className="my-6 border-gray-600" />
-
-              <nav className="flex flex-col text-gray-400">
-                <Link to = "/rules">Normas de la comunidad</Link>
-                <Link to = "/themes">Otros temas</Link>
-            </nav>
-
-            <hr className="my-6 border-gray-600" />
-
-            <nav className="flex flex-col text-gray-400">
-                <Link to = "/about">Información</Link>
-                <Link to = "/contact">Contacto</Link>
-            </nav>
-
-            
-
-          
+     
+      <div
+        className={`fixed inset-y-0 left-0 w-64 bg-white shadow-md z-50 transform transition-transform duration-200 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0 md:static md:inset-auto md:transform-none`}
+      >
+        <div className="p-4">
+          <h1 className="text-2xl font-bold mb-4">Logo</h1>
+          <nav className="space-y-2">
+            <Link to="/" className="block px-2 py-1 text-gray-700 hover:bg-gray-200 rounded">Posts</Link>
+            <Link to="/create" className="block px-2 py-1 text-gray-700 hover:bg-gray-200 rounded">Crear Post</Link>
+          </nav>
+          <hr className="my-6 border-gray-200" />
+          <nav className="space-y-2">
+            <Link to="/rules" className="block px-2 py-1 text-gray-700 hover:bg-gray-200 rounded">Normas de la comunidad</Link>
+            <Link to="/themes" className="block px-2 py-1 text-gray-700 hover:bg-gray-200 rounded">Otros temas</Link>
+          </nav>
+          <hr className="my-6 border-gray-200" />
+          <nav className="space-y-2">
+            <Link to="/about" className="block px-2 py-1 text-gray-700 hover:bg-gray-200 rounded">Información</Link>
+            <Link to="/contact" className="block px-2 py-1 text-gray-700 hover:bg-gray-200 rounded">Contacto</Link>
+          </nav>
 
         </div>
-    );
+      </div>
+    </>
+  );
 }
 
-export default SideBar
+export default Sidebar;
